@@ -39,5 +39,5 @@ Interp4Move::Interp4Move()
  */
 void Interp4Move::PrintSyntax() const
 {
-  cout << "   Move  NazwaObiektu  Szybkosc[m/s]  DlugoscDrogi[m]" << endl;
+  cout << "   Move  nazwa_obiektu  szybkosc[m/s]  dlugosc_drogi[m]" << endl;
 }
