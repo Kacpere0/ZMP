@@ -20,3 +20,7 @@ void Interp4Rotate::PrintSyntax() const
 {
   cout << "   Rotate  nazwa_obiektu  nazwa_osi  szybkość_katowa  kat_obrotu" << endl;
 }
+
+const char* Interp4Rotate::GetCmdName() const {
+  return "Rotate";
+}

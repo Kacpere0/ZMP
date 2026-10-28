@@ -20,3 +20,7 @@ void Interp4Pause::PrintSyntax() const
 {
   cout << "   Pause  czas_pauzy_ms" << endl;
 }
+
+const char* Interp4Pause::GetCmdName() const {
+  return "Pause";
+}

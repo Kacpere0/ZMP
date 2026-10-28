@@ -41,3 +41,7 @@ void Interp4Move::PrintSyntax() const
 {
   cout << "   Move  nazwa_obiektu  szybkosc[m/s]  dlugosc_drogi[m]" << endl;
 }
+
+const char* Interp4Move::GetCmdName() const {
+  return "Move";
+}

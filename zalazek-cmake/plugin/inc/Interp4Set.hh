@@ -14,7 +14,7 @@ class Interp4Set: public AbstractInterp4Command {
    * \brief Wyświetla postać bieżącego polecenia (nazwę oraz wartości parametrów)
    */
   virtual void PrintSyntax() const override;
-
+  virtual const char* GetCmdName() const override;
 };
 
 #endif

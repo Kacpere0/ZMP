@@ -20,3 +20,7 @@ void Interp4Set::PrintSyntax() const
 {
   cout << "   Set  nazwa_obiektu  wsp_x  wsp_y  wsp_z  kat_OX  kat_OY  kat_OZ" << endl;
 }
+
+const char* Interp4Set::GetCmdName() const {
+  return "Set";
+}

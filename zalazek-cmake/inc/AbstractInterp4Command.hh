@@ -23,7 +23,9 @@
     /*!
      * \brief Wyświetla składnię polecenia
      */
-     virtual void PrintSyntax() const = 0;
+    virtual void PrintSyntax() const = 0;
+    
+    virtual const char* GetCmdName() const = 0;
   };
 
 
