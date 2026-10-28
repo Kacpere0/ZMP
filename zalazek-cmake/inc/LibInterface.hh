@@ -10,8 +10,14 @@ class LibInterface {
     std::string CmdName;
     AbstractInterp4Command *(*pCreateInterp)(void) = nullptr;
 public:
-    LibInterface();
     ~LibInterface();
+
+    bool Init(std::string &LibName);
+    const std::string GetCmdName() const { return CmdName; } 
+
+    AbstractInterp4Command* CreateCmd() const {
+        return pCreateInterp ? pCreateInterp() : nullptr;
+    }
 };
 
 #endif

@@ -1,47 +1,56 @@
 #include <iostream>
-#include <dlfcn.h>
-#include <cassert>
-#include "AbstractInterp4Command.hh"
+#include <fstream>
+#include <string>
+#include "Set4LibInterfaces.hh"
 
 using namespace std;
 
-#define PLUGIN_NAME__move "libInterp4Move.so"
+#define PLUGIN_MOVE "libInterp4Move.so"
+#define PLUGIN_SET "libInterp4Set.so"
+#define PLUGIN_PAUSE "libInterp4Pause.so"
+#define PLUGIN_ROTATE "libInterp4Rotate.so"
 
-
-int main()
-{
-  void *pLibHnd_Move = dlopen(PLUGIN_NAME__move,RTLD_LAZY);
-  AbstractInterp4Command *(*pCreateCmdInterp_Move)(void);
-  void *pFun;
-
-  if (pLibHnd_Move) {
-    cout << endl
-	 << ":)  Wtyczka \"" << PLUGIN_NAME__move << "\" zostala poprawnie zaladowana."
-	 << endl;
-  } else {
-     cerr << "!!! Brak wtyczki: " PLUGIN_NAME__move << endl;
-     return 1;
+bool ReadFromFile(const string &FileName, Set4LibInterfaces &Plugins) {
+  ifstream file(FileName);
+  if (!file.is_open()) {
+    cerr << "!!! Nie udało się załadować pliku: " << FileName << endl;
+    return false;
   }
 
+  string cmdName;
+  while (file >> cmdName) {
+    shared_ptr<LibInterface> plugin = Plugins.FindPlugin(cmdName);
+    if (!plugin) {
+      cerr << "!!! Nie znaleziono wtyczki obsługującej polecenie: " << cmdName << endl;
+      return false; 
+    }
 
-  pFun = dlsym(pLibHnd_Move,"CreateCmdInterp");
-  if (pFun) {
-    cout  << ":)  Funkcja \"CreateCmdInterp\" zostala znaleziona we wtyczce "
-	  << "\"" << PLUGIN_NAME__move << "\"." << endl;
-  } else {
-     cerr << "!!! Nie znaleziono funkcji CreateCmdInterp" << endl;
-     return 1;
+    AbstractInterp4Command *pInterp = plugin->CreateCmd();
+    if (!pInterp) {
+      cerr << "!!! Błąd przy tworzenu instancji interpretera polecenia: " << cmdName << endl;
+      return false;
+    }
+
+    cout << endl;
+    pInterp->PrintSyntax();
+
+    delete pInterp;
   }
-  pCreateCmdInterp_Move = reinterpret_cast<AbstractInterp4Command* (*)(void)>(pFun);
 
+  return true;
+}
 
-  AbstractInterp4Command *pInterp = pCreateCmdInterp_Move();
+int main() {
+  Set4LibInterfaces plugins;
+  if (!plugins.AddPlugin(PLUGIN_MOVE) || !plugins.AddPlugin(PLUGIN_PAUSE) ||
+      !plugins.AddPlugin(PLUGIN_ROTATE) || !plugins.AddPlugin(PLUGIN_SET)) {
+        cerr << "!!! Błąd przy dodawaniu pluginów" << endl;
+        return 1;
+  }
 
-  cout << endl;
-  pInterp->PrintSyntax();
-  cout << endl;
-  
-  delete pInterp;
+  if (!ReadFromFile("polecenia.txt", plugins)) {
+    return 1;
+  }
 
-  dlclose(pLibHnd_Move);
+  return 0;
 }
