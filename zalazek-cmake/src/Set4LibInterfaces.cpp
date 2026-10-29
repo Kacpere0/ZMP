@@ -1,9 +1,11 @@
 #include "Set4LibInterfaces.hh"
 
+typedef std::map<std::string, std::shared_ptr<LibInterface>>::iterator map_it;
+
 bool Set4LibInterfaces::AddPlugin(const std::string &LibName) {
     std::string pluginName = LibName;
     
-    auto pLib = std::make_shared<LibInterface>();
+    std::shared_ptr<LibInterface> pLib = std::make_shared<LibInterface>();
     if (!pLib->Init(pluginName)) {
         return false;
     }
@@ -13,7 +15,7 @@ bool Set4LibInterfaces::AddPlugin(const std::string &LibName) {
 }
 
 std::shared_ptr<LibInterface> Set4LibInterfaces::FindPlugin(const std::string &CmdName) {
-    auto it = this->find(CmdName);
+    map_it it = this->find(CmdName);
 
     if (it == this->end()) {
         return nullptr;

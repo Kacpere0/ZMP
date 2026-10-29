@@ -45,7 +45,7 @@ int main() {
   if (!plugins.AddPlugin(PLUGIN_MOVE) || !plugins.AddPlugin(PLUGIN_PAUSE) ||
       !plugins.AddPlugin(PLUGIN_ROTATE) || !plugins.AddPlugin(PLUGIN_SET)) {
         cerr << "!!! Błąd przy dodawaniu pluginów" << endl;
-        return 1;
+    return 1;
   }
 
   if (!ReadFromFile("polecenia.txt", plugins)) {
