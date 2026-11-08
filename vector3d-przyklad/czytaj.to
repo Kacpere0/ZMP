@@ -1,5 +1,0 @@
-Kompilacja programu:
-  g++ main.cpp
-
-Uruchomienie:
-  ./a.out
