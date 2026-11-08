@@ -4,8 +4,10 @@
 #include "AbstractInterp4Command.hh"
 
 class Interp4Set: public AbstractInterp4Command {
-
- public:
+  std::string ObjName;
+  double xcord, ycord, zcord;
+  double OXangl, OYangl, OZangl;
+public:
   /*!
    * \brief
    */
@@ -15,6 +17,7 @@ class Interp4Set: public AbstractInterp4Command {
    */
   virtual void PrintSyntax() const override;
   virtual const char* GetCmdName() const override;
+  virtual void PrintCmd() const override;
   virtual bool ReadParams(std::istream &rStrm_CmdList) override;
   virtual bool ExecCmd(Scene &Scn) override;
 };

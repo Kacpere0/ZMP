@@ -24,3 +24,24 @@ void Interp4Set::PrintSyntax() const
 const char* Interp4Set::GetCmdName() const {
   return "Set";
 }
+
+void Interp4Set::PrintCmd() const {
+  cout << "   " << GetCmdName() <<  "  " << ObjName << "  " << xcord << "  " << ycord << "  "
+       << zcord << "  " << OXangl << "  " << OYangl << "  " << OZangl << endl;
+}
+
+bool Interp4Set::ReadParams(std::istream &rStrm_CmdList) {
+  rStrm_CmdList >> ObjName >> xcord >> ycord >> zcord >> OXangl >> OYangl >> OZangl;
+
+  if (rStrm_CmdList.fail()) {
+    return false;
+  }
+  return true;
+}
+
+// tymczasowa wesja
+bool Interp4Set::ExecCmd(Scene &Scn) {
+  PrintCmd();
+  
+  return true;
+}

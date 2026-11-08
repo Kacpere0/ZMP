@@ -46,6 +46,10 @@ const char* Interp4Move::GetCmdName() const {
   return "Move";
 }
 
+void Interp4Move::PrintCmd() const {
+  cout << "   " << GetCmdName() << "  " << ObjName << "  " << Speed_mS << "  " << Distance_m << endl;
+}
+
 bool Interp4Move::ReadParams(std::istream &rStrm_CmdList) {
   rStrm_CmdList >> ObjName >> Speed_mS >> Distance_m; 
   

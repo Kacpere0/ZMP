@@ -36,6 +36,7 @@ public:
     */
     virtual void PrintSyntax() const override;
     virtual const char* GetCmdName() const override;
+    virtual void PrintCmd() const override;
     virtual bool ReadParams(std::istream &rStrm_CmdList) override;
     virtual bool ExecCmd(Scene &Scn) override;
 };

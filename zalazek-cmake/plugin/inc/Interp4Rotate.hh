@@ -4,7 +4,11 @@
 #include "AbstractInterp4Command.hh"
 
 class Interp4Rotate: public AbstractInterp4Command {
- public:
+  std::string ObjName;
+  std::string AxisName;
+  double AngVelocity;
+  double RotationAng;
+public:
   /*!
    * \brief
    */
@@ -14,6 +18,7 @@ class Interp4Rotate: public AbstractInterp4Command {
    */
   virtual void PrintSyntax() const override;
   virtual const char* GetCmdName() const override;
+  virtual void PrintCmd() const override;
   virtual bool ReadParams(std::istream &rStrm_CmdList) override;
   virtual bool ExecCmd(Scene &Scn) override;
 };

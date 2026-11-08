@@ -24,3 +24,23 @@ void Interp4Pause::PrintSyntax() const
 const char* Interp4Pause::GetCmdName() const {
   return "Pause";
 }
+
+void Interp4Pause::PrintCmd() const {
+  cout << "   " << GetCmdName() <<  "  " << Pause_time_ms << endl;
+}
+
+bool Interp4Pause::ReadParams(std::istream &rStrm_CmdList) {
+  rStrm_CmdList >> Pause_time_ms;
+
+  if (rStrm_CmdList.fail()) {
+    return false;
+  }
+  return true;
+}
+
+// tymczasowa wesja
+bool Interp4Pause::ExecCmd(Scene &Scn) {
+  PrintCmd();
+  
+  return true;
+}

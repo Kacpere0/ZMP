@@ -4,7 +4,7 @@
 #include "AbstractInterp4Command.hh"
 
 class Interp4Pause: public AbstractInterp4Command {
-
+  double Pause_time_ms;
 public:
   /*!
   * \brief
@@ -15,6 +15,7 @@ public:
   */
   virtual void PrintSyntax() const override;
   virtual const char* GetCmdName() const override;
+  virtual void PrintCmd() const override;
   virtual bool ReadParams(std::istream &rStrm_CmdList) override;
   virtual bool ExecCmd(Scene &Scn) override;
 };

@@ -18,20 +18,17 @@
   * przez daną wtyczkę.
   */
   class AbstractInterp4Command {
-   public:
-
-    virtual ~AbstractInterp4Command() {}
+public:
+  virtual ~AbstractInterp4Command() {}
     
-    /*!
-     * \brief Wyświetla składnię polecenia
-     */
-    virtual void PrintSyntax() const = 0;
-    
-    virtual const char* GetCmdName() const = 0;
-
-    virtual bool ReadParams(std::istream &rStrm_CmdList) = 0;
-
-    virtual bool ExecCmd(Scene &Scn) = 0;
+  /*!
+   * \brief Wyświetla składnię polecenia
+  */
+  virtual void PrintSyntax() const = 0;
+  virtual const char* GetCmdName() const = 0;
+  virtual void PrintCmd() const = 0;
+  virtual bool ReadParams(std::istream &rStrm_CmdList) = 0;
+  virtual bool ExecCmd(Scene &Scn) = 0;
   };
 
 #endif

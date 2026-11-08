@@ -24,3 +24,23 @@ void Interp4Rotate::PrintSyntax() const
 const char* Interp4Rotate::GetCmdName() const {
   return "Rotate";
 }
+
+void Interp4Rotate::PrintCmd() const {
+  cout << "   " << GetCmdName() <<  "  " << ObjName << "  " << AxisName << "  " << AngVelocity << "  " << RotationAng << endl;
+}
+
+bool Interp4Rotate::ReadParams(std::istream &rStrm_CmdList) {
+  rStrm_CmdList >> ObjName >> AxisName >> AngVelocity >> RotationAng;
+
+  if (rStrm_CmdList.fail()) {
+    return false;
+  }
+  return true;
+}
+
+// tymczasowa wesja
+bool Interp4Rotate::ExecCmd(Scene &Scn) {
+  PrintCmd();
+  
+  return true;
+}
