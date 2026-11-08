@@ -45,3 +45,28 @@ void Interp4Move::PrintSyntax() const
 const char* Interp4Move::GetCmdName() const {
   return "Move";
 }
+
+bool Interp4Move::ReadParams(std::istream &rStrm_CmdList) {
+  rStrm_CmdList >> ObjName >> Speed_mS >> Distance_m; 
+  
+  if (rStrm_CmdList.fail()) {
+    return false;
+  }
+  return true;
+}
+
+bool Interp4Move::ExecCmd(Scene &Scn) {
+  std::shared_ptr<GeomObject> Object = Scn.FindGeomObj(ObjName);
+  
+  if (Object == nullptr) {
+    return false;
+  }
+
+  if (Speed_mS >= 0) {
+    Object->UsePos_m()[0] += Distance_m;
+  } else {
+    Object->UsePos_m()[0] -= Distance_m;
+  }
+
+  return true;
+}

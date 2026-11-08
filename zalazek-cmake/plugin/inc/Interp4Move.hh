@@ -22,6 +22,9 @@
  *  które wymusza jego ruch.
  */
 class Interp4Move: public AbstractInterp4Command {
+    std::string ObjName;
+    double Speed_mS;
+    double Distance_m;
 
 public:
     /*!
@@ -33,6 +36,8 @@ public:
     */
     virtual void PrintSyntax() const override;
     virtual const char* GetCmdName() const override;
+    virtual bool ReadParams(std::istream &rStrm_CmdList) override;
+    virtual bool ExecCmd(Scene &Scn) override;
 };
 
 #endif

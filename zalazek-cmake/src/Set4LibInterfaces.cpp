@@ -1,7 +1,5 @@
 #include "Set4LibInterfaces.hh"
 
-typedef std::map<std::string, std::shared_ptr<LibInterface>>::iterator map_it;
-
 bool Set4LibInterfaces::AddPlugin(const std::string &LibName) {
     std::string pluginName = LibName;
     

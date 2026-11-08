@@ -15,6 +15,8 @@ class Interp4Set: public AbstractInterp4Command {
    */
   virtual void PrintSyntax() const override;
   virtual const char* GetCmdName() const override;
+  virtual bool ReadParams(std::istream &rStrm_CmdList) override;
+  virtual bool ExecCmd(Scene &Scn) override;
 };
 
 #endif

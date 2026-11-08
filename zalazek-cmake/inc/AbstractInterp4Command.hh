@@ -1,6 +1,8 @@
 #ifndef ABSTRACTINTERP4COMMAND_HH
 #define ABSTRACTINTERP4COMMAND_HH
 
+#include "Scene.hh"
+
 /*!
  * \file 
  * \brief Zawiera definicję klasy abstrakcyjnej AbstractInterp4Command
@@ -26,7 +28,10 @@
     virtual void PrintSyntax() const = 0;
     
     virtual const char* GetCmdName() const = 0;
-  };
 
+    virtual bool ReadParams(std::istream &rStrm_CmdList) = 0;
+
+    virtual bool ExecCmd(Scene &Scn) = 0;
+  };
 
 #endif
