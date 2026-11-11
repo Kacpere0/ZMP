@@ -72,5 +72,7 @@ bool Interp4Move::ExecCmd(Scene &Scn) {
     Object->UsePos_m()[0] -= Distance_m;
   }
 
+  PrintCmd();
+
   return true;
 }
