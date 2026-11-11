@@ -38,9 +38,8 @@ bool Interp4Pause::ReadParams(std::istream &rStrm_CmdList) {
   return true;
 }
 
-// tymczasowa wesja
-bool Interp4Pause::ExecCmd(Scene &Scn) {
-  PrintCmd();
+bool Interp4Pause::ExecCmd(Scene &/*Scn*/) {
+  usleep(Pause_time_ms * 1000);
   
   return true;
 }
