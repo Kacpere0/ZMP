@@ -5,7 +5,7 @@
 #include <memory>
 #include "LibInterface.hh"
 
-typedef std::map<std::string, std::shared_ptr<LibInterface>>::iterator map_it;
+typedef std::map<std::string, std::shared_ptr<LibInterface>>::iterator map_itLib;
 
 class Set4LibInterfaces : public std::map<std::string, std::shared_ptr<LibInterface>> {
 public:

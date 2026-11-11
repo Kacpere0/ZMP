@@ -13,7 +13,7 @@ bool Set4LibInterfaces::AddPlugin(const std::string &LibName) {
 }
 
 std::shared_ptr<LibInterface> Set4LibInterfaces::FindPlugin(const std::string &CmdName) {
-    map_it it = this->find(CmdName);
+    map_itLib it = this->find(CmdName);
 
     if (it == this->end()) {
         return nullptr;

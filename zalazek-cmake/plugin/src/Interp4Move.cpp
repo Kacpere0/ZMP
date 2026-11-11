@@ -72,7 +72,7 @@ bool Interp4Move::ExecCmd(Scene &Scn) {
     Object->UsePos_m()[0] -= Distance_m;
   }
 
-  PrintCmd();
+  cout << "   Nowa pozycja " << ObjName << ": " << Object->GetPos_m() << endl;
 
   return true;
 }

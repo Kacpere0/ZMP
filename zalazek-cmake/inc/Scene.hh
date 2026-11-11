@@ -5,7 +5,7 @@
 #include <map>
 #include <memory>
 
-typedef std::map<std::string, std::shared_ptr<GeomObject>>::iterator map_it;
+typedef std::map<std::string, std::shared_ptr<GeomObject>>::iterator map_itGeom;
 
 class Scene : public std::map<std::string, std::shared_ptr<GeomObject>> {
 public:

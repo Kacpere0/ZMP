@@ -13,7 +13,7 @@ bool Scene::AddGeomObj(const std::string &ObjName) {
 }
 
 std::shared_ptr<GeomObject> Scene::FindGeomObj(const std::string &ObjName) {
-    map_it it = this->find(ObjName);
+    map_itGeom it = this->find(ObjName);
 
     if (it == this->end()) {
         return nullptr;
