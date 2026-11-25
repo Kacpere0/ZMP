@@ -2,6 +2,8 @@
 #define ABSTRACTINTERP4COMMAND_HH
 
 #include "Scene.hh"
+#include "string"
+#include "ComChannel.hh"
 
 /*!
  * \file 
@@ -17,7 +19,7 @@
   * Definiuje interfejs interpretera polecenia udostępnianego
   * przez daną wtyczkę.
   */
-  class AbstractInterp4Command {
+class AbstractInterp4Command {
 public:
   virtual ~AbstractInterp4Command() {}
     
@@ -28,7 +30,7 @@ public:
   virtual const char* GetCmdName() const = 0;
   virtual void PrintCmd() const = 0;
   virtual bool ReadParams(std::istream &rStrm_CmdList) = 0;
-  virtual bool ExecCmd(Scene &Scn) = 0;
-  };
+  virtual bool ExecCmd(Scene &Scn, ComChannel &Channel) = 0;
+};
 
 #endif

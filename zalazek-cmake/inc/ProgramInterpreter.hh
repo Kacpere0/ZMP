@@ -3,6 +3,7 @@
 
 #include "Set4LibInterfaces.hh"
 #include "Scene.hh"
+#include "ComChannel.hh"
 #include <iostream>
 #include <fstream>
 
@@ -15,6 +16,7 @@ using namespace std;
 
 class ProgramInterpreter {
     Set4LibInterfaces LibManager;
+    ComChannel CtrlChannel;
     Scene Scn;
 public:
     ProgramInterpreter();

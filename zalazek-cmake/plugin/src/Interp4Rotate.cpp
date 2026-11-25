@@ -38,9 +38,33 @@ bool Interp4Rotate::ReadParams(std::istream &rStrm_CmdList) {
   return true;
 }
 
-// tymczasowa wesja
-bool Interp4Rotate::ExecCmd(Scene &Scn) {
-  PrintCmd();
+bool Interp4Rotate::ExecCmd(Scene &Scn, ComChannel &Channel) {
+  std::shared_ptr<GeomObject> Object = Scn.FindGeomObj(ObjName);
+  if (Object == nullptr) {
+    return false;
+  }
+
+  if (AngVelocity >= 0) {
+    if (AxisName == "OX") {
+      Object->UseRotAng_deg()[0] += RotationAng;
+    } else if (AxisName == "OY") {
+      Object->UseRotAng_deg()[1] += RotationAng;
+    } else if (AxisName == "OZ") {
+      Object->UseRotAng_deg()[2] += RotationAng;
+    } else {
+      return false;
+    }
+  } else {
+    if (AxisName == "OX") {
+      Object->UseRotAng_deg()[0] -= RotationAng;
+    } else if (AxisName == "OY") {
+      Object->UseRotAng_deg()[1] -= RotationAng;
+    } else if (AxisName == "OZ") {
+      Object->UseRotAng_deg()[2] -= RotationAng;
+    } else {
+      return false;
+    }
+  }
   
   return true;
 }

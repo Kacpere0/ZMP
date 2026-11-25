@@ -38,7 +38,7 @@ bool Interp4Pause::ReadParams(std::istream &rStrm_CmdList) {
   return true;
 }
 
-bool Interp4Pause::ExecCmd(Scene &/*Scn*/) {
+bool Interp4Pause::ExecCmd(Scene &/*Scn*/, ComChannel &Channel) {
   usleep(Pause_time_ms * 1000);
   
   return true;

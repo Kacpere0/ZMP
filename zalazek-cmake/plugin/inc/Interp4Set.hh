@@ -19,7 +19,7 @@ public:
   virtual const char* GetCmdName() const override;
   virtual void PrintCmd() const override;
   virtual bool ReadParams(std::istream &rStrm_CmdList) override;
-  virtual bool ExecCmd(Scene &Scn) override;
+  virtual bool ExecCmd(Scene &Scn, ComChannel &Channel) override;
 };
 
 #endif

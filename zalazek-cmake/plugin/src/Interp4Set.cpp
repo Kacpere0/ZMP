@@ -39,9 +39,15 @@ bool Interp4Set::ReadParams(std::istream &rStrm_CmdList) {
   return true;
 }
 
-// tymczasowa wesja
-bool Interp4Set::ExecCmd(Scene &Scn) {
-  PrintCmd();
+bool Interp4Set::ExecCmd(Scene &Scn, ComChannel &Channel) {
+  std::shared_ptr<GeomObject> Object = Scn.FindGeomObj(ObjName);
+
+  if (Object == nullptr) {
+    return false;
+  }
+
+  Object->UsePos_m() = {xcord, ycord, zcord};
+  Object->UseRotAng_deg() = {OXangl, OYangl, OZangl};
   
   return true;
 }

@@ -59,7 +59,7 @@ bool Interp4Move::ReadParams(std::istream &rStrm_CmdList) {
   return true;
 }
 
-bool Interp4Move::ExecCmd(Scene &Scn) {
+bool Interp4Move::ExecCmd(Scene &Scn, ComChannel &Channel) {
   std::shared_ptr<GeomObject> Object = Scn.FindGeomObj(ObjName);
   
   if (Object == nullptr) {
