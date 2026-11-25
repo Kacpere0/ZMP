@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Interp4Move.hh"
 
 
@@ -61,18 +60,38 @@ bool Interp4Move::ReadParams(std::istream &rStrm_CmdList) {
 
 bool Interp4Move::ExecCmd(Scene &Scn, ComChannel &Channel) {
   std::shared_ptr<GeomObject> Object = Scn.FindGeomObj(ObjName);
-  
   if (Object == nullptr) {
     return false;
   }
 
-  if (Speed_mS >= 0) {
-    Object->UsePos_m()[0] += Distance_m;
-  } else {
-    Object->UsePos_m()[0] -= Distance_m;
+  if (Speed_mS == 0 || Distance_m < 0) {
+    return false;
   }
 
-  cout << "   Nowa pozycja " << ObjName << ": " << Object->GetPos_m() << endl;
+  double totalTime_s = Distance_m / std::abs(Speed_mS);
+
+  int steps = 10;
+  double stepDist = (Speed_mS >= 0 ? 1.0 : -1.0) * (Distance_m / steps);
+
+  int stepTime_ms = static_cast<int>((totalTime_s * 1000.0)/ steps);
+
+  for (int i = 0; i < steps; ++i) {
+    std::ostringstream oss;
+
+    {
+      std::lock_guard<std::mutex> lock(Object->UseGuard());
+
+      double yaw_rad = Object->GetRotAng_deg()[2] * M_PI / 180.0;
+
+      Object->UsePos_m()[0] += stepDist * std::cos(yaw_rad);
+      Object->UsePos_m()[1] += stepDist * std::sin(yaw_rad);
+
+      oss << Object->GetName() << "  Pos: " << Object->GetPos_m() << "  Rot: " << Object->GetRotAng_deg() << "\n";
+    }
+
+    Channel.Print(oss.str());
+    std::this_thread::sleep_for(std::chrono::milliseconds(stepTime_ms));
+  }
 
   return true;
 }

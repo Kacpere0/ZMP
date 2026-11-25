@@ -40,9 +40,9 @@ bool ProgramInterpreter::ExecProgram(const char* FileName_Prog) {
             return false;
         }
 
-        pInterp->PrintCmd();
+        //pInterp->PrintCmd();
 
-        if(!pInterp->ExecCmd(this->Scn)) {
+        if(!pInterp->ExecCmd(this->Scn, this->CtrlChannel)) {
             cerr << "!!! Błąd wykonywania polecenia dla: " << cmdName << endl;
             delete pInterp;
             return false;

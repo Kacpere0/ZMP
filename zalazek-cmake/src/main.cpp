@@ -1,11 +1,14 @@
 #include "ProgramInterpreter.hh"
+#include <thread>
 
 int main() {
   ProgramInterpreter program;
   
-  if(!program.ExecProgram("polecenia.txt")) {
-    return 1;
-  }
+  std::thread t1(&ProgramInterpreter::ExecProgram, &program, "polecenia1.txt");
+  std::thread t2(&ProgramInterpreter::ExecProgram, &program, "polecenia2.txt");
+
+  t1.join();
+  t2.join();
 
   return 0;
 }

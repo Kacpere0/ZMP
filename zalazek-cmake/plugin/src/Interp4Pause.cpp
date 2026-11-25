@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Interp4Pause.hh"
 
 using std::cout;
@@ -38,8 +37,12 @@ bool Interp4Pause::ReadParams(std::istream &rStrm_CmdList) {
   return true;
 }
 
-bool Interp4Pause::ExecCmd(Scene &/*Scn*/, ComChannel &Channel) {
-  usleep(Pause_time_ms * 1000);
+bool Interp4Pause::ExecCmd(Scene &/*Scn*/, ComChannel &/*Channel*/) {
+  if (Pause_time_ms < 0) {
+    return false;
+  }
+
+  std::this_thread::sleep_for(std::chrono::milliseconds(Pause_time_ms));
   
   return true;
 }

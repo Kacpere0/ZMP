@@ -2,10 +2,10 @@
 #define  COMMAND4PAUSE_HH
 
 #include "AbstractInterp4Command.hh"
-#include <unistd.h>
+#include <thread>
 
 class Interp4Pause: public AbstractInterp4Command {
-  double Pause_time_ms;
+  int Pause_time_ms;
 public:
   /*!
   * \brief

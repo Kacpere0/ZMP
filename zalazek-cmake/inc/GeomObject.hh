@@ -16,6 +16,7 @@ public:
     const g3d::Vector &GetRotAng_deg() const;
     g3d::Vector &UsePos_m();
     g3d::Vector &UseRotAng_deg();
+    std::mutex &UseGuard();
 };
 
 #endif

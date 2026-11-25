@@ -2,6 +2,7 @@
 #define  COMMAND4ROTATE_HH
 
 #include "AbstractInterp4Command.hh"
+#include <thread>
 
 class Interp4Rotate: public AbstractInterp4Command {
   std::string ObjName;

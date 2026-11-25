@@ -7,6 +7,8 @@
 #endif
 
 #include "AbstractInterp4Command.hh"
+#include <thread>
+#include <cmath>
 
 /*!
  * \file

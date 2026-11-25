@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Interp4Set.hh"
 
 using std::cout;
@@ -41,13 +40,21 @@ bool Interp4Set::ReadParams(std::istream &rStrm_CmdList) {
 
 bool Interp4Set::ExecCmd(Scene &Scn, ComChannel &Channel) {
   std::shared_ptr<GeomObject> Object = Scn.FindGeomObj(ObjName);
+  std::ostringstream oss;
 
   if (Object == nullptr) {
     return false;
   }
+  {
+    std::lock_guard<std::mutex> lock(Object->UseGuard());
 
-  Object->UsePos_m() = {xcord, ycord, zcord};
-  Object->UseRotAng_deg() = {OXangl, OYangl, OZangl};
-  
+    Object->UsePos_m() = {xcord, ycord, zcord};
+    Object->UseRotAng_deg() = {OXangl, OYangl, OZangl};
+
+    oss << Object->GetName() << "  Pos: " << Object->GetPos_m() << "  Rot: " << Object->GetRotAng_deg() << "\n";
+  }
+
+  Channel.Print(oss.str());
+
   return true;
 }
