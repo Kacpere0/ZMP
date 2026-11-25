@@ -7,7 +7,7 @@ ProgramInterpreter::ProgramInterpreter() {
         exit(EXIT_FAILURE);
     }
 
-    if (!Scn.AddGeomObj("Obj_A") || !Scn.AddGeomObj("Obj_B")) {
+    if (!Scn.AddGeomObj("Ob_A") || !Scn.AddGeomObj("Ob_B")) {
         cerr << "!!! Błąd przy dodawaniu obiektów" << endl;
         exit(EXIT_FAILURE);
     }

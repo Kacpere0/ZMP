@@ -2,6 +2,7 @@
 #include <thread>
 
 int main() {
+  g3d::Vector::SetDisplayPrecision(4);
   ProgramInterpreter program;
   
   std::thread t1(&ProgramInterpreter::ExecProgram, &program, "polecenia1.txt");

@@ -51,7 +51,7 @@ bool Interp4Set::ExecCmd(Scene &Scn, ComChannel &Channel) {
     Object->UsePos_m() = {xcord, ycord, zcord};
     Object->UseRotAng_deg() = {OXangl, OYangl, OZangl};
 
-    oss << Object->GetName() << "  Pos: " << Object->GetPos_m() << "  Rot: " << Object->GetRotAng_deg() << "\n";
+    oss << "Set: " << Object->GetName() << "  Pos: " << Object->GetPos_m() << "  Rot: " << Object->GetRotAng_deg() << "\n";
   }
 
   Channel.Print(oss.str());

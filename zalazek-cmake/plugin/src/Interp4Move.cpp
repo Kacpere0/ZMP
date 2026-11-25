@@ -86,7 +86,7 @@ bool Interp4Move::ExecCmd(Scene &Scn, ComChannel &Channel) {
       Object->UsePos_m()[0] += stepDist * std::cos(yaw_rad);
       Object->UsePos_m()[1] += stepDist * std::sin(yaw_rad);
 
-      oss << Object->GetName() << "  Pos: " << Object->GetPos_m() << "  Rot: " << Object->GetRotAng_deg() << "\n";
+      oss << "Move: " << Object->GetName() << "  Pos: " << Object->GetPos_m() << "  Rot: " << Object->GetRotAng_deg() << "\n";
     }
 
     Channel.Print(oss.str());

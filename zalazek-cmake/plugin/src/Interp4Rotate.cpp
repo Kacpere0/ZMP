@@ -72,7 +72,7 @@ bool Interp4Rotate::ExecCmd(Scene &Scn, ComChannel &Channel) {
       std::lock_guard<std::mutex> lock(Object->UseGuard());
 
       Object->UseRotAng_deg()[axisIdx] += stepAng;
-      oss << Object->GetName() << "  Pos: " << Object->GetPos_m() << "  Rot: " << Object->GetRotAng_deg() << "\n";
+      oss << "Rotate: " << Object->GetName() << "  Pos: " << Object->GetPos_m() << "  Rot: " << Object->GetRotAng_deg() << "\n";
     }
 
     Channel.Print(oss.str());
