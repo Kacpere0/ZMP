@@ -55,6 +55,10 @@ bool Interp4Move::ReadParams(std::istream &rStrm_CmdList) {
   if (rStrm_CmdList.fail()) {
     return false;
   }
+  if (Speed_mS == 0 || Distance_m < 0) {
+    return false;
+  }
+
   return true;
 }
 
@@ -64,16 +68,11 @@ bool Interp4Move::ExecCmd(Scene &Scn, ComChannel &Channel) {
     return false;
   }
 
-  if (Speed_mS == 0 || Distance_m < 0) {
-    return false;
-  }
+  double totalTime_ms = Distance_m / std::abs(Speed_mS) * 1000.0;
+  const int stepTime_ms = 100;
 
-  double totalTime_s = Distance_m / std::abs(Speed_mS);
-
-  int steps = 10;
+  int steps = std::max(1, static_cast<int>(std::round(totalTime_ms / stepTime_ms)));
   double stepDist = (Speed_mS >= 0 ? 1.0 : -1.0) * (Distance_m / steps);
-
-  int stepTime_ms = static_cast<int>((totalTime_s * 1000.0)/ steps);
 
   for (int i = 0; i < steps; ++i) {
     std::ostringstream oss;

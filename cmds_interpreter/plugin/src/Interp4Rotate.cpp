@@ -58,12 +58,11 @@ bool Interp4Rotate::ExecCmd(Scene &Scn, ComChannel &Channel) {
     return false;
   }
 
-  double totalTime_s = RotationAng / std::abs(AngVelocity);
+  double totalTime_ms = RotationAng / std::abs(AngVelocity) * 1000.0;
+  const int stepTime_ms = 100;
 
-  int steps = 10;
+  int steps = std::max(1, static_cast<int>(std::round(totalTime_ms / stepTime_ms)));
   double stepAng = (AngVelocity >= 0 ? 1.0 : -1.0) * (RotationAng / steps);
-
-  int stepTime_ms = static_cast<int>((totalTime_s * 1000.0) / steps);
 
   for (int i = 0; i < steps; ++i) {
     std::ostringstream oss;
